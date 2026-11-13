@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Web Media Editor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Web Media Editor</h1>
+      <p>Image & Video Processing with Canvas API</p>
+    </header>
+
+    <main class="editor-layout">
+      <!-- Sidebar Controls -->
+      <aside class="controls-sidebar">
+        <!-- Media Source -->
+        <div class="control-section">
+          <h3>1. Import Media</h3>
+          <div class="actions">
+            <input type="file" id="media-input" accept="image/*,video/*" hidden>
+            <button class="btn btn-secondary" onclick="document.getElementById('media-input').click()">Load Image / Video</button>
+          </div>
+        </div>
+
+        <!-- Adjustments -->
+        <div class="control-section">
+          <h3>2. Adjustments</h3>
+          <div class="control-group">
+            <label for="brightness">Brightness</label>
+            <input type="range" id="brightness" min="0" max="200" value="100">
+          </div>
+          <div class="control-group">
+            <label for="contrast">Contrast</label>
+            <input type="range" id="contrast" min="0" max="200" value="100">
+          </div>
+          <div class="control-group">
+            <label for="saturate">Saturation</label>
+            <input type="range" id="saturate" min="0" max="200" value="100">
+          </div>
+          <div class="control-group">
+            <label for="grayscale">Grayscale</label>
+            <input type="range" id="grayscale" min="0" max="100" value="0">
+          </div>
+          <div class="control-group">
+            <label for="sepia">Sepia</label>
+            <input type="range" id="sepia" min="0" max="100" value="0">
+          </div>
+          <div class="control-group">
+            <label for="blur">Blur</label>
+            <input type="range" id="blur" min="0" max="20" value="0">
+          </div>
+        </div>
+
+        <!-- Transform -->
+        <div class="control-section">
+          <h3>3. Transform</h3>
+          <div class="btn-grid">
+            <button class="btn btn-small" id="rotate-left-btn">Rotate -90°</button>
+            <button class="btn btn-small" id="rotate-right-btn">Rotate +90°</button>
+            <button class="btn btn-small" id="flip-h-btn">Flip H</button>
+            <button class="btn btn-small" id="flip-v-btn">Flip V</button>
+          </div>
+          <button class="btn btn-secondary mt-2" id="crop-toggle-btn">Enable Crop Box</button>
+        </div>
+
+        <!-- Text Overlay -->
+        <div class="control-section">
+          <h3>4. Text Overlay</h3>
+          <div class="control-group">
+            <input type="text" id="text-input" placeholder="Enter overlay text...">
+          </div>
+          <div class="control-group flex-row">
+            <input type="color" id="text-color" value="#ffffff">
+            <input type="number" id="text-size" value="40" min="10" max="200">
+          </div>
+          <button class="btn btn-secondary" id="add-text-btn">Add Text Layer</button>
+        </div>
+
+        <!-- Actions -->
+        <div class="control-section">
+          <h3>5. Export</h3>
+          <div class="actions">
+            <button class="btn btn-warning" id="reset-btn">Reset All</button>
+            <button class="btn btn-primary" id="download-btn">Download Output</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Canvas Area -->
+      <section class="canvas-area">
+        <div class="canvas-wrapper" id="canvas-wrapper">
+          <canvas id="main-canvas"></canvas>
+          <div id="crop-box" class="crop-box hidden">
+            <button id="apply-crop-btn" class="crop-btn">Apply Crop</button>
+          </div>
+        </div>
+
+        <!-- Video Player Controls (Visible for videos) -->
+        <div id="video-controls" class="video-controls hidden">
+          <button class="btn btn-small" id="play-pause-btn">Play / Pause</button>
+          <span id="video-time">00:00 / 00:00</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
